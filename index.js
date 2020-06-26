@@ -4,7 +4,6 @@ const connection = require("./mongo.add");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const passport = require("./passport.add");
-const nunjucks = require("./nunjucks.add");
 const api = require("./api");
 const path = require("path");
 const { authenticateJWT } = require("./api/jwt.helper");
@@ -48,7 +47,6 @@ server.use((req, res, next) => {
 server.use(passport.initialize());
 server.use(passport.session());
 passport.config();
-nunjucks.conf(server);
 server.use(express.static(path.join(__dirname, "docs")));
 server.use("/api", authenticateJWT(), api);
 

@@ -24,7 +24,6 @@ A notebook for your contacts
  - express
  - express-session
  - connect-mongo
- - nunjucks
  - multer
  - @hapi/joi
  - celebrate
