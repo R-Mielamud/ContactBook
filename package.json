@@ -1,0 +1,71 @@
+{
+  "name": "contact-book-server",
+  "version": "1.0.0",
+  "description": "A server for contact-book",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=prod node launch",
+    "start-dev": "NODE_ENV=dev node launch",
+    "start-daemon-dev": "node ./node_modules/nodemon/bin/nodemon launch.js",
+    "docs-gen": "node ./node_modules/apidoc/bin/apidoc -i ./api/ -o ./docs/",
+    "test": "node ./node_modules/jest/bin/jest",
+    "test-careful": "node ./node_modules/jest/bin/jest --runInBand --detectOpenHandles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/R-Mielamud/ContactBook.git"
+  },
+  "keywords": [
+    "hillel",
+    "js",
+    "html",
+    "css",
+    "es6",
+    "contact-book",
+    "2020",
+    "hillel2020",
+    "express",
+    "server",
+    "nodejs",
+    "node",
+    "npm",
+    "mongodb",
+    "passport",
+    "passport-local",
+    "react",
+    "redux"
+  ],
+  "author": "Roman Melamud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/R-Mielamud/ContactBook/issues"
+  },
+  "homepage": "https://github.com/R-Mielamud/ContactBook#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^12.1.1",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.17",
+    "multer": "^1.4.2",
+    "nunjucks": "^3.2.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "apidoc": "^0.23.0",
+    "jest": "^26.1.0",
+    "nodemon": "^2.0.4",
+    "supertest": "^4.0.2"
+  },
+  "apidoc": {
+    "url": "https://127.0.0.1:3001",
+    "title": "Contact Book api documentation"
+  }
+}
