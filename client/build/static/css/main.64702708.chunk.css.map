@@ -1,0 +1,1 @@
+{"version":3,"sources":["common.scss"],"names":[],"mappings":"AAAA,YACI,UAAW,CACX,WAAY,CACf,KAGG,wBAAyB","file":"main.64702708.chunk.css","sourcesContent":["#root, .fill {\n    width: 100%;\n    height: 100%;\n}\n\nbody {\n    background-color: #F6F6F6;\n}"]}

@@ -1,7 +1,9 @@
 #!/usr/bin/sh
 if node -v ; then
-    npm i
-    npm start
+    sudo npm i
+    cd client
+    sudo npm i
+    cd ..
 else
     echo "Install nodejs!"
 fi
