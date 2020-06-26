@@ -1,1 +1,1 @@
-export const PROXY = "http://127.0.0.1:3001";
+export const PROXY = "http://13.58.248.175:3001";
