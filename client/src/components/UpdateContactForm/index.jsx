@@ -49,8 +49,8 @@ const UpdateContactForm = ({ categories, id, defs }) => {
             ...(birthDate ? { 
                 birthDate: new Date(
                     (new Date(birthDate)).getFullYear(),
-                    (new Date(birthDate)).getMonth() + 1,
-                    (new Date(birthDate)).getDate()
+                    (new Date(birthDate)).getMonth(),
+                    (new Date(birthDate)).getDate() + 1
                 )
             } : {}),
             who,
