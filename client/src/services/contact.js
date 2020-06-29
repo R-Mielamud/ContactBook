@@ -31,7 +31,7 @@ export const updateContact = async (id, settings) => {
 
 export const getBirthdays = async () => {
     const result = await request({
-        url: "/api/contact/birthdays?tz" + Intl.DateTimeFormat().resolvedOptions().timeZone,
+        url: "/api/contact/birthdays?tz=" + Intl.DateTimeFormat().resolvedOptions().timeZone,
         method: "GET"
     });
 
