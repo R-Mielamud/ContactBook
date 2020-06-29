@@ -27,7 +27,7 @@ describe("Contact tests", () => {
                 },
                 category: "5ef5c19dba4ce103e2194bbc",
                 about: "About info",
-                birthDate: new Date((new Date()).getFullYear(), (new Date()).getMonth() + 1, (new Date()).getDate() + 1)
+                birthDate: new Date((new Date()).getFullYear(), (new Date()).getMonth(), (new Date()).getDate() + 10)
             });
 
         expect(res.statusCode).toBe(200);

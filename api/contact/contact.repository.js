@@ -40,12 +40,12 @@ exports.birthdays = async (tz, user) => {
 
     contacts = contacts.filter(cont => {
         cont.birthDate = new Date(cont.birthDate.getFullYear(), cont.birthDate.getMonth() + 1, cont.birthDate.getDate());
-        const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD").tz(tz).add(23, "hours");
-        const before = moment().tz(tz).isBefore(birth);
+        const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD").tz(tz);
+        const before = moment().tz(tz).isBefore(birth) || cont.birthDate.getDate() === (new Date()).getDate();
         const after = moment().tz(tz).add(30, "days").isAfter(birth);
 
         if (before && after) {
-            cont.birthdayStr = moment(birth).fromNow();
+            cont.birthdayStr = (cont.birthDate.getDate() === (new Date()).getDate()) ? "today" : moment(birth).fromNow();
         }
 
         return before && after;
