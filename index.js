@@ -1,4 +1,6 @@
 const express = require("express");
+const https = require("https");
+const fs = require("fs");
 require("dotenv").config();
 const connection = require("./mongo.add");
 const session = require("express-session");
@@ -67,4 +69,9 @@ server.use((err, req, res, next) => {
     res.status(status).json(e);
 });
 
-module.exports = server;
+const opts = process.env.USE_SSL ? {
+    key: fs.readFileSync(process.env.KEY_PATH),
+    cert: fs.readFileSync(process.env.CERT_PATH)
+} : {};
+
+module.exports = process.env.USE_SSL ? https.createServer(opts, server) : server;
