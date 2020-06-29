@@ -1,5 +1,5 @@
 const Contact = require("./contact.model");
-const moment = require("moment");
+const moment = require("moment-timezone");
 
 exports.add = async (data) => {
     const contact = new Contact(data);
@@ -30,7 +30,7 @@ exports.byId = async id => {
     return contact;
 };
 
-exports.birthdays = async user => {
+exports.birthdays = async (tz, user) => {
     let contacts = await Contact.find({ user: user._id }).select("firstName lastName mainTelephone birthDate").lean().exec();
 
     const __date_fmt__ = date => {
@@ -39,9 +39,9 @@ exports.birthdays = async user => {
     };
 
     contacts = contacts.filter(cont => {
-        const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD");
-        const before = moment().isBefore(birth);
-        const after = moment().add(30, "days").isAfter(birth);
+        const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD").tz(tz);
+        const before = moment().tz(tz).isBefore(birth);
+        const after = moment().tz(tz).add(30, "days").isAfter(birth);
 
         if (before && after) {
             cont.birthdayStr = moment(birth).fromNow();

@@ -25,7 +25,7 @@ exports.getById = async (req, res, next) => {
 };
 
 exports.birthdays = async (req, res, next) => {
-    const result = await birthdays(req.user);
+    const result = await birthdays(req.query.tz || "Europe/Kiev", req.user);
     res.data = result;
     next();
 };

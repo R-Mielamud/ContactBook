@@ -19,9 +19,9 @@ exports.register = async (data) => {
     }
 };
 
-exports.birthdays = async user => {
+exports.birthdays = async (tz, user) => {
     try {
-        const result = await birthdays(user);
+        const result = await birthdays(tz, user);
 
         return {
             success: true,
