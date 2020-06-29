@@ -45,7 +45,13 @@ exports.birthdays = async (tz, user) => {
         const after = moment().tz(tz).add(30, "days").isAfter(birth);
 
         if (before && after) {
-            cont.birthdayStr = (cont.birthDate.getDate() === (new Date()).getDate()) ? "today" : moment(birth).fromNow();
+            if (cont.birthDate.getDate() === (new Date()).getDate()) {
+                cont.birthdayStr = "today";
+            } else if (cont.birthDate.getDate() - (new Date()).getDate() === 1) {
+                cont.birthdayStr = "tomorrow";
+            } else {
+                cont.birthdayStr = birth.add(1, "days").fromNow();
+            }
         }
 
         return before && after;
