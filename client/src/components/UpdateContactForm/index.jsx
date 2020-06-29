@@ -50,7 +50,7 @@ const UpdateContactForm = ({ categories, id, defs }) => {
                 birthDate: new Date(
                     (new Date(birthDate)).getFullYear(),
                     (new Date(birthDate)).getMonth(),
-                    (new Date(birthDate)).getDate() + 1
+                    (new Date(birthDate)).getDate()
                 )
             } : {}),
             who,
@@ -73,6 +73,12 @@ const UpdateContactForm = ({ categories, id, defs }) => {
         Loading(false);
         window.location.reload();
     };
+
+    let birthDateForDelault;
+
+    if (defs.birthDate) {
+        birthDateForDelault = new Date(defs.birthDate.getFullYear(), defs.birthDate.getMonth() + 1, defs.birthDate.getDate());
+    }
 
     return (
         <Form onSubmit={UpdateContact}>
@@ -209,12 +215,14 @@ const UpdateContactForm = ({ categories, id, defs }) => {
             <Form.Input
                 fluid
                 type="date"
+                label="Birth date"
+                labelPosition="left"
                 placeholder="Birth date"
                 onChange={(e, data) => BirthDate(data.value)}
                 defaultValue={defs.birthDate ? (
-                    __fmt_Y__(defs.birthDate.getFullYear()) + "-" +
-                    __fmt__(defs.birthDate.getMonth()) + "-" +
-                    __fmt__(defs.birthDate.getDate())
+                    __fmt_Y__(birthDateForDelault.getFullYear()) + "-" +
+                    __fmt__(birthDateForDelault.getMonth()) + "-" +
+                    __fmt__(birthDateForDelault.getDate())
                 ) : ""}
             />
             <Form.Checkbox 

@@ -42,7 +42,7 @@ class BirthdaysPage extends React.Component {
                                     <Header.Subheader style={{ color: "yellow" }}>{contact.birthdayStr}</Header.Subheader>
                                 </Header>
                             </List.Item>
-                        )) : <Header size="medium">No birthdays</Header>}
+                        )) : <Header size="medium" style={{ color: "white" }}>No birthdays</Header>}
                     </List>
                 </Segment>
             );
