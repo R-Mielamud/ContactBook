@@ -51,7 +51,7 @@ exports.birthdays = async (tz, user) => {
             } else if (cont.birthDate.getDate() + (prod ? 1 : 0) - (new Date()).getDate() === 1) {
                 cont.birthdayStr = "tomorrow";
             } else {
-                cont.birthdayStr = birth.add(1, "days").fromNow();
+                cont.birthdayStr = birth.add((prod ? 0 : 1), "days").fromNow();
             }
         }
 
