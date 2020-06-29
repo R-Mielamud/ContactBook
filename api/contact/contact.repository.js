@@ -39,15 +39,16 @@ exports.birthdays = async (tz, user) => {
     };
 
     contacts = contacts.filter(cont => {
+        const prod = process.env.NODE_ENV === "prod";
         cont.birthDate = new Date(cont.birthDate.getFullYear(), cont.birthDate.getMonth() + 1, cont.birthDate.getDate());
         const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD").tz(tz);
-        const before = moment().tz(tz).isBefore(birth) || cont.birthDate.getDate() === (new Date()).getDate();
+        const before = moment().tz(tz).isBefore(prod ? birth.add(2, "days") : birth) || cont.birthDate.getDate() === (new Date()).getDate();
         const after = moment().tz(tz).add(30, "days").isAfter(birth);
 
         if (before && after) {
-            if (cont.birthDate.getDate() === (new Date()).getDate()) {
+            if (cont.birthDate.getDate() + (prod ? 1 : 0) === (new Date()).getDate()) {
                 cont.birthdayStr = "today";
-            } else if (cont.birthDate.getDate() - (new Date()).getDate() === 1) {
+            } else if (cont.birthDate.getDate() + (prod ? 1 : 0) - (new Date()).getDate() === 1) {
                 cont.birthdayStr = "tomorrow";
             } else {
                 cont.birthdayStr = birth.add(1, "days").fromNow();
