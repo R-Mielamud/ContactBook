@@ -61,7 +61,7 @@ const AddContactForm = ({ categories }) => {
         if (birthDate) {
             settings.birthDate = new Date(
                 (new Date(birthDate)).getFullYear(),
-                (new Date(birthDate)).getMonth() + 1,
+                (new Date(birthDate)).getMonth(),
                 (new Date(birthDate)).getDate()
             );
         }
