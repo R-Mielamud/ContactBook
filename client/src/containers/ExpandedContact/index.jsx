@@ -122,7 +122,7 @@ const ExpandedContact = ({ contact, Close, isNew }) => {
                                     mainEmail: contact.mainEmail,
                                     category: contact.category._id,
                                     emails: contact.emails,
-                                    telephones: contact.telephones.map(tel => ({ code: tel.code, value: tel.value })),
+                                    telephones: contact.telephones ? contact.telephones.map(tel => ({ code: tel.code, value: tel.value })) : null,
                                     who: contact.who,
                                     about: contact.about,
                                     messangers: contact.messangers,
