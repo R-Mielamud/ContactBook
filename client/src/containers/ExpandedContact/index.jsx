@@ -122,7 +122,7 @@ const ExpandedContact = ({ contact, Close, isNew }) => {
                                     mainEmail: contact.mainEmail,
                                     category: contact.category._id,
                                     emails: contact.emails,
-                                    telephones: contact.telephones,
+                                    telephones: contact.telephones.map(tel => ({ code: tel.code, value: tel.value })),
                                     who: contact.who,
                                     about: contact.about,
                                     messangers: contact.messangers,
@@ -131,7 +131,7 @@ const ExpandedContact = ({ contact, Close, isNew }) => {
                                     photo: contact.photo ? contact.photo._id : null
                                 })[1]);
 
-                                //window.location.href = "/";
+                                window.location.href = "/";
                             }}
                         >
                             Accept
