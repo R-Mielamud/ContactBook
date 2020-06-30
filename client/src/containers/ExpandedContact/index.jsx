@@ -4,9 +4,11 @@ import { setExpandedContact } from "../../redux/actions";
 import { Modal, Grid, Label, Button, Image } from "semantic-ui-react";
 import { get as getCategories } from "../../services/category";
 import UpdateContactPage from "../UpdateContactPage";
-import { deleteContact } from "../../services/contact";
+import { deleteContact, addContact } from "../../services/contact";
+import ShareContact from "../../components/ShareContact";
+import stripEmpty from "../../stripEmpty.util";
 
-const ExpandedContact = ({ contact, Close }) => {
+const ExpandedContact = ({ contact, Close, isNew }) => {
     const categories = useRef();
     const requested = useRef();
 
@@ -81,31 +83,70 @@ const ExpandedContact = ({ contact, Close }) => {
                 <Image circular centered size="small" src={contact.photo.url} alt="Photo" />
             </Modal.Content>
             <Modal.Actions>
-                <Button.Group>
-                    <Button positive compact onClick={Close}>Close</Button>
-                    {requested.current ? (
-                        <Modal openOnTriggerClick closeIcon trigger={<Button color="yellow" compact>Update</Button>}>
-                            <Modal.Header>Update contact</Modal.Header>
+                {!isNew ? (
+                    <Button.Group>
+                        <Button positive compact onClick={Close}>Close</Button>
+                        {requested.current ? (
+                            <Modal openOnTriggerClick closeIcon trigger={<Button color="yellow" compact>Update</Button>}>
+                                <Modal.Header>Update contact</Modal.Header>
+                                <Modal.Content>
+                                    <UpdateContactPage id={contact._id} categories={categories.current} defs={contact} />
+                                </Modal.Content>
+                            </Modal>
+                        ) : ""}
+                        <Modal openOnTriggerClick closeIcon trigger={<Button negative icon="trash" compact />}>
+                            <Modal.Header>Are you sure?</Modal.Header>
                             <Modal.Content>
-                                <UpdateContactPage id={contact._id} categories={categories.current} defs={contact} />
+                                Are you sure want to delete this contact?
                             </Modal.Content>
+                            <Modal.Actions>
+                                <Button negative onClick={async () => {
+                                    await deleteContact(contact._id);
+                                    window.location.reload();
+                                }}>
+                                    Yes
+                                </Button>
+                            </Modal.Actions>
                         </Modal>
-                    ) : ""}
-                    <Modal openOnTriggerClick closeIcon trigger={<Button negative icon="trash" compact />}>
-                        <Modal.Header>Are you sure?</Modal.Header>
-                        <Modal.Content>
-                            Are you sure want to delete this contact?
-                        </Modal.Content>
-                        <Modal.Actions>
-                            <Button negative onClick={async () => {
-                                await deleteContact(contact._id);
-                                window.location.reload();
-                            }}>
-                                Yes
-                            </Button>
-                        </Modal.Actions>
-                    </Modal>
-                </Button.Group>
+                        <ShareContact id={contact._id} />
+                    </Button.Group>
+                ) : (
+                    <Button.Group>
+                        <Button
+                            positive
+                            onClick={async () => {
+                                await addContact(stripEmpty({
+                                    firstName: contact.firstName,
+                                    lastName: contact.lastName,
+                                    mainTelephone: contact.mainTelephone,
+                                    mainEmail: contact.mainEmail,
+                                    category: contact.category._id,
+                                    emails: contact.emails,
+                                    telephones: contact.telephones,
+                                    who: contact.who,
+                                    about: contact.about,
+                                    messangers: contact.messangers,
+                                    favorite: contact.favorite,
+                                    birthDate: contact.birthDate,
+                                    photo: contact.photo ? contact.photo._id : null
+                                })[1]);
+
+                                window.location.href = "/";
+                            }}
+                        >
+                            Accept
+                        </Button>
+                        <Button.Or />
+                        <Button
+                            negative
+                            onClick={async () => {
+                                window.location.href = "/";
+                            }}
+                        >
+                            Exit
+                        </Button>
+                    </Button.Group>
+                )}
             </Modal.Actions>
         </Modal>
     );

@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import RegisterPage from "../RegisterPage";
 import UpdateProfilePage from "../UpdateProfilePage";
 import NotFound from "../../scenes/NotFound";
+import SharedContactPage from "../SharedContactPage";
 
 class Routing extends React.Component {
     constructor({ user }) {
@@ -47,6 +48,7 @@ class Routing extends React.Component {
                         <Route exaxt component={RegisterPage} path="/register" />
                         <PrivateRoute exact authorized={this.state.exists || false} component={MainPage} path="/" />
                         <PrivateRoute exact authorized={this.state.exists || false} component={UpdateProfilePage} path="/update" />
+                        <PrivateRoute authorized={this.state.exists || false} component={SharedContactPage} path="/shared/:id" />
                         <Route path="*" exact component={NotFound} />
                     </Switch>
                 </Router>

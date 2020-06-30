@@ -54,6 +54,13 @@ exports.updateValidator = {
     })
 };
 
+exports.shareValidator = {
+    [Segments.BODY]: Joi.object().keys({
+        userEmail: string.email.required(),
+        id: string.objectID.required()
+    })
+};
+
 exports.deleteValidator = {
     [Segments.BODY]: Joi.object().keys({
         id: string.objectID.required()

@@ -1,5 +1,6 @@
 const { add, all, update, remove, byId, birthdays } = require("./contact.repository");
 const { __getErrorFormatted } = require("../error.helper");
+const { config, send } = require("../../email.helper");
 
 exports.register = async (data) => {
     try {
@@ -115,4 +116,38 @@ exports.remove = async (userID, id) => {
             message: __getErrorFormatted(err).message
         }
     }
-}
+};
+
+exports.share = (express, user, email, id) => {
+    try {
+        const sendMail = () => send(express, {
+            from: "admin@contact-book.tk",
+            to: [email],
+            subject: "Someone shared a contact with you! - Contact-Book.TK",
+            html: `
+                <center><h4>User ${user.email} would like to share a contact with you!</h4></center>
+                <center><p><a href="${process.env.SITE_URL}/shared/${id}">See it!</a></p></center>
+            `
+        });
+
+        if (!express.locals.configured) {
+            config(express).then(() => {
+                sendMail();
+                express.locals.configured = true;
+            });
+        } else {
+            sendMail();
+        }
+
+        return {
+            success: true
+        };
+    } catch (err) {
+        return {
+            success: false,
+            status: 400,
+            contacts: null,
+            message: __getErrorFormatted(err).message
+        }
+    }
+};

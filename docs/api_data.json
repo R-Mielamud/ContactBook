@@ -21,7 +21,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    category: {\n        state: \"deleted\"\n    }\n}",
+          "content": "{\n    \"success\": true,\n    \"category\": {\n        \"state\": \"deleted\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -40,7 +40,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    categories: [...]\n}",
+          "content": "{\n    \"success\": true,\n    \"categories\": [...]\n}",
           "type": "json"
         }
       ]
@@ -79,7 +79,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    category: {...}\n}",
+          "content": "{\n    \"success\": true,\n    \"category\": {...}\n}",
           "type": "json"
         }
       ]
@@ -118,7 +118,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    category: {...}\n}",
+          "content": "{\n    \"success\": true,\n    \"category\": {...}\n}",
           "type": "json"
         }
       ]
@@ -150,7 +150,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contact: {\n        state: \"deleted\"\n    }\n}",
+          "content": "{\n    \"success\": true,\n    \"contact\": {\n        \"state\": \"deleted\"\n    }\n}",
           "type": "json"
         }
       ]
@@ -169,7 +169,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contacts: [...]\n}",
+          "content": "{\n    \"success\": true,\n    \"contacts\": [...]\n}",
           "type": "json"
         }
       ]
@@ -188,7 +188,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contacts: [...]\n}",
+          "content": "{\n    \"success\": true,\n    \"contacts\": [...]\n}",
           "type": "json"
         }
       ]
@@ -207,7 +207,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contact: {...}\n}",
+          "content": "{\n    \"success\": true,\n    \"contact\": {...}\n}",
           "type": "json"
         }
       ]
@@ -226,7 +226,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contacts: [...]\n}",
+          "content": "{\n    \"success\": true,\n    \"contacts\": [...]\n}",
           "type": "json"
         }
       ]
@@ -342,7 +342,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contact: {...}\n}",
+          "content": "{\n    \"success\": true,\n    \"contact\": {...}\n}",
           "type": "json"
         }
       ]
@@ -351,6 +351,45 @@
     "filename": "api/contact/index.js",
     "groupTitle": "Contacts",
     "name": "PostApiContactRegister"
+  },
+  {
+    "type": "post",
+    "url": "/api/contact/share",
+    "title": "Share contact with person",
+    "group": "Contacts",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Id of the contact</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "userEmail",
+            "description": "<p>Email on which you would like to send a message about sharing</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success example:",
+          "content": "{\n    \"success\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "api/contact/index.js",
+    "groupTitle": "Contacts",
+    "name": "PostApiContactShare"
   },
   {
     "type": "put",
@@ -458,7 +497,7 @@
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    success: true,\n    contact: {...}\n}",
+          "content": "{\n    \"success\": true,\n    \"contact\": {...}\n}",
           "type": "json"
         }
       ]

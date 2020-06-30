@@ -12,8 +12,8 @@ const router = Router();
 * @apiGroup Categories
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       categories: [...]
+*       "success": true,
+*       "categories": [...]
 *   }
 */
 router.get(
@@ -30,8 +30,8 @@ router.get(
 * @apiGroup Categories
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       category: {...}
+*       "success": true,
+*       "category": {...}
 *   }
 */
 router.post(
@@ -50,8 +50,8 @@ router.post(
 * @apiGroup Categories
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       category: {...}
+*       "success": true,
+*       "category": {...}
 *   }
 */
 router.put(
@@ -68,9 +68,9 @@ router.put(
 * @apiGroup Categories
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       category: {
-*           state: "deleted"
+*       "success": true,
+*       "category": {
+*           "state": "deleted"
 *       }
 *   }
 */

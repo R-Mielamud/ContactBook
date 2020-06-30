@@ -1,4 +1,4 @@
-const { alter, register, get, remove, byId, birthdays } = require("./contact.service");
+const { alter, register, get, remove, byId, birthdays, share } = require("./contact.service");
 
 exports.register = async (req, res, next) => {
     const result = await register(req.body);
@@ -38,6 +38,12 @@ exports.getMin = async (req, res, next) => {
 
 exports.remove = async (req, res, next) => {
     const result = await remove(req.user._id, req.body.id);
+    res.data = result;
+    next();
+};
+
+exports.share = async (req, res, next) => {
+    const result = share(req.app, req.user, req.body.userEmail, req.body.id);
     res.data = result;
     next();
 };

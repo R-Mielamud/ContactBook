@@ -1,7 +1,7 @@
 const { Router } = require("express");
-const { register, alter, getAll, getMin, remove, getById, birthdays } = require("./contact.controller");
+const { register, alter, getAll, getMin, remove, getById, birthdays, share } = require("./contact.controller");
 const { validate } = require("../validator.helper");
-const { registerValidator, updateValidator, deleteValidator, getQueryValidator } = require("./contact.validators");
+const { registerValidator, updateValidator, deleteValidator, getQueryValidator, shareValidator } = require("./contact.validators");
 const { user, passUserID } = require("./contact.middleware");
 const respond = require("../response.middleware");
 
@@ -26,8 +26,8 @@ const router = Router();
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contact: {...}
+*       "success": true,
+*       "contact": {...}
 *   }
 */
 router.post(
@@ -58,8 +58,8 @@ router.post(
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contact: {...}
+*       "success": true,
+*       "contact": {...}
 *   }
 */
 router.put(
@@ -75,8 +75,8 @@ router.put(
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contacts: [...]
+*       "success": true,
+*       "contacts": [...]
 *   }
 */
 router.get(
@@ -92,8 +92,8 @@ router.get(
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contacts: [...]
+*       "success": true,
+*       "contacts": [...]
 *   }
 */
 router.get(
@@ -110,9 +110,9 @@ router.get(
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contact: {
-*           state: "deleted"
+*       "success": true,
+*       "contact": {
+*           "state": "deleted"
 *       }
 *   }
 */
@@ -129,8 +129,8 @@ router.delete(
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contacts: [...]
+*       "success": true,
+*       "contacts": [...]
 *   }
 */
 router.get(
@@ -145,14 +145,32 @@ router.get(
 * @apiGroup Contacts
 * @apiSuccessExample {json} Success example:
 *   {
-*       success: true,
-*       contact: {...}
+*       "success": true,
+*       "contact": {...}
 *   }
 */
 router.get(
     "/:id",
     user,
     getById,
+    respond
+);
+
+/**
+ * @api {post} /api/contact/share Share contact with person
+ * @apiGroup Contacts
+ * @apiParam {String} id Id of the contact
+ * @apiParam {String} userEmail Email on which you would like to send a message about sharing
+ * @apiSuccessExample {json} Success example:
+ *  {
+ *      "success": true
+ *  }
+ */
+router.post(
+    "/share",
+    user,
+    validate(shareValidator),
+    share,
     respond
 );
 

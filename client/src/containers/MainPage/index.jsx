@@ -6,8 +6,10 @@ import ExpandedContact from "../ExpandedContact";
 import querystring from "querystring";
 
 class MainPage extends React.Component {
-    constructor() {
+    constructor({ newExpanded = false, query = undefined }) {
         super();
+        this.query = query;
+        this.newExpanded = newExpanded;
         this.state = { requested: false, contacts: [] };
     }
 
@@ -21,7 +23,7 @@ class MainPage extends React.Component {
     render() {
         document.title = "Contact Book";
         let contacts;
-        const query = this.props.location.search;
+        const query = this.query !== undefined ? this.query : this.props.location.search;
         const filter = querystring.parse(query.slice(1, query.length));
 
         if (filter) {
@@ -45,7 +47,7 @@ class MainPage extends React.Component {
             <>
                 <SiteHeader />
                 <Contacts contacts={contacts} filterDefs={filter} />
-                <ExpandedContact />
+                <ExpandedContact isNew={this.newExpanded} />
             </>
         );
     }

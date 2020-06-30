@@ -9,6 +9,15 @@ export const getContacts = async () => {
     return result.contacts;
 };
 
+export const getContactById = async id => {
+    const result = await request({
+        url: `/api/contact/${id}`,
+        method: "GET"
+    });
+
+    return result.contact;
+};
+
 export const addContact = async settings => {
     const result = await request({
         url: "/api/contact/register",
@@ -46,4 +55,16 @@ export const deleteContact = async id => {
     });
 
     return result.contact;
+};
+
+export const share = async (id, email) => {
+    const result = await request({
+        url: "/api/contact/share",
+        method: "POST",
+        body: JSON.stringify({ id, userEmail: email })
+    });
+
+    if (result.message) {
+        console.error(result.message);
+    }
 };
