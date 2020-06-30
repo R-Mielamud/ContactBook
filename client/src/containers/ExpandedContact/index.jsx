@@ -131,7 +131,7 @@ const ExpandedContact = ({ contact, Close, isNew }) => {
                                     photo: contact.photo ? contact.photo._id : null
                                 })[1]);
 
-                                window.location.href = "/";
+                                //window.location.href = "/";
                             }}
                         >
                             Accept
