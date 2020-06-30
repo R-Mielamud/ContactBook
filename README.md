@@ -34,3 +34,6 @@ A notebook for your contacts
  - react-router-dom
  - redux
  - react-redux
+ - jest
+ - apidoc
+ - serve

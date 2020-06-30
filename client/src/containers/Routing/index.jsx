@@ -11,6 +11,7 @@ import RegisterPage from "../RegisterPage";
 import UpdateProfilePage from "../UpdateProfilePage";
 import NotFound from "../../scenes/NotFound";
 import SharedContactPage from "../SharedContactPage";
+import RedirectToApi from "../../components/RedirectToApi";
 
 class Routing extends React.Component {
     constructor({ user }) {
@@ -46,6 +47,7 @@ class Routing extends React.Component {
                     <Switch>
                         <Route exact component={LoginPage} path="/login" />
                         <Route exaxt component={RegisterPage} path="/register" />
+                        <Route exact component={RedirectToApi} path="/api" />
                         <PrivateRoute exact authorized={this.state.exists || false} component={MainPage} path="/" />
                         <PrivateRoute exact authorized={this.state.exists || false} component={UpdateProfilePage} path="/update" />
                         <PrivateRoute authorized={this.state.exists || false} component={SharedContactPage} path="/shared/:id" />
