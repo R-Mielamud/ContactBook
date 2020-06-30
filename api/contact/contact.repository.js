@@ -39,6 +39,7 @@ exports.birthdays = async (tz, user) => {
     };
 
     contacts = contacts.filter(cont => {
+        if (!cont.birthDate) return false;
         const prod = process.env.NODE_ENV === "prod";
         cont.birthDate = new Date(cont.birthDate.getFullYear(), cont.birthDate.getMonth() + 1, cont.birthDate.getDate());
         const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD").tz(tz);
