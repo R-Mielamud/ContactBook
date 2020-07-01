@@ -43,7 +43,6 @@ exports.birthdays = async (tz, user) => {
         const birth = moment(`${"0".repeat(4 - String(cont.birthDate.getFullYear()).length) + String(cont.birthDate.getFullYear())}${__date_fmt__(cont.birthDate.getMonth() + 1)}${__date_fmt__(cont.birthDate.getDate())}`, "YYYYMMDD").tz(tz).parseZone();
         const before = moment().tz(tz).isBefore(birth) || birth.date() === moment().tz(tz).date();
         const after = moment().tz(tz).add(30, "days").isAfter(birth);
-        console.log(birth);
 
         if (before && after) {
             if (birth.date() === moment().tz(tz).date()) {
