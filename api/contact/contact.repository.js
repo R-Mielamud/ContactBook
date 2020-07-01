@@ -40,19 +40,18 @@ exports.birthdays = async (tz, user) => {
 
     contacts = contacts.filter(cont => {
         if (!cont.birthDate) return false;
-        const prod = process.env.NODE_ENV === "prod";
-        cont.birthDate = new Date(cont.birthDate.getFullYear(), cont.birthDate.getMonth() + 1, cont.birthDate.getDate());
-        const birth = moment(`${__date_fmt__(cont.birthDate.getMonth())}${__date_fmt__(cont.birthDate.getDate())}`, "MMDD").tz(tz);
-        const before = moment().tz(tz).isBefore(prod ? birth.add(2, "days") : birth) || cont.birthDate.getDate() === (new Date()).getDate();
+        const birth = moment(`${"0".repeat(4 - String(cont.birthDate.getFullYear()).length) + String(cont.birthDate.getFullYear())}${__date_fmt__(cont.birthDate.getMonth() + 1)}${__date_fmt__(cont.birthDate.getDate())}`, "YYYYMMDD").tz(tz).parseZone();
+        const before = moment().tz(tz).isBefore(birth) || birth.date() === moment().tz(tz).date();
         const after = moment().tz(tz).add(30, "days").isAfter(birth);
+        console.log(birth);
 
         if (before && after) {
-            if (cont.birthDate.getDate() + (prod ? 1 : 0) === (new Date()).getDate()) {
+            if (birth.date() === moment().tz(tz).date()) {
                 cont.birthdayStr = "today";
-            } else if (cont.birthDate.getDate() + (prod ? 1 : 0) - (new Date()).getDate() === 1) {
+            } else if (birth.date() - moment().tz(tz).date() === 1) {
                 cont.birthdayStr = "tomorrow";
             } else {
-                cont.birthdayStr = birth.add((prod ? 0 : 1), "days").fromNow();
+                cont.birthdayStr = birth.add(1, "days").fromNow();
             }
         }
 
