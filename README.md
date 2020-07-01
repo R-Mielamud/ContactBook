@@ -39,6 +39,11 @@ A notebook for your contacts
  - bcryptjs
  - dotenv
  - react
+ - react-dom
+ - react-notifications
+ - react-copy-to-clipboard
+ - querystring
+ - validator
  - react-router
  - react-router-dom
  - redux
