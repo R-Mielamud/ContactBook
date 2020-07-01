@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './scenes/Home';
 import 'semantic-ui-css/semantic.min.css';
+import 'react-notifications/lib/notifications.css';
 import "./styles/common.scss";
 import { PROXY } from "./config";
 

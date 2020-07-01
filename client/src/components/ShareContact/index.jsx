@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Modal, Button, Form, Icon } from "semantic-ui-react";
+import { Modal, Button, Form, Icon, Divider } from "semantic-ui-react";
 import validator from "validator";
 import { share } from "../../services/contact";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { NotificationManager, NotificationContainer } from "react-notifications";
 
 const ShareContact = ({ id }) => {
     const [email, Email] = useState("");
@@ -21,12 +23,30 @@ const ShareContact = ({ id }) => {
         window.location.reload();
     };
 
+    const link = window.location.origin + "/shared/" + id;
+
     return (
         <Modal closeIcon openOnTriggerClick trigger={<Button positive><Icon name="share alternate" />Share</Button>}>
             <Modal.Header>
                 Share a contact with person
             </Modal.Header>
             <Modal.Content>
+                <Form.Input
+                    fluid
+                    value={link}
+                    action={(
+                        <CopyToClipboard text={link} onCopy={() => {
+                            NotificationManager.success("Link copied to the clipboard", "Copied!", 2000)
+                        }}>
+                            <Button color="teal">
+                                <Icon name="copy" />
+                                Copy link to the contact
+                            </Button>
+                        </CopyToClipboard>
+                    )}
+                />
+                <NotificationContainer />
+                <Divider horizontal>or</Divider>
                 <Form onSubmit={Share}>
                     <Form.Input
                         icon="at"
