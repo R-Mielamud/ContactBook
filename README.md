@@ -24,6 +24,7 @@ A notebook for your contacts
  - NPM
  - Git
  - GitHub
+ - AWS EC2
 
 ### NodeJS Libraries used:
  - passport
