@@ -5,8 +5,16 @@ A notebook for your contacts
  1. Clone the repo
  2. . deploy.sh
 
-### To run later:
+### To run later IN PRODUCTION MODE:
  1. npm start
+
+### To run later IN DEV MODE:
+ 1. npm run start-dev
+
+### To run later IN DAEMON DEV MODE:
+ 1. npm run start-daemon-dev
+
+### WARNING: production mode is developed for different timezone (UTC)
 
 # ENJOY!
 
