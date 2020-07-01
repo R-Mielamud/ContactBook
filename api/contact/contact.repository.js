@@ -40,7 +40,8 @@ exports.birthdays = async (tz, user) => {
 
     contacts = contacts.filter(cont => {
         if (!cont.birthDate) return false;
-        const birth = moment(`${"0".repeat(4 - String(cont.birthDate.getFullYear()).length) + String(cont.birthDate.getFullYear())}${__date_fmt__(cont.birthDate.getMonth() + 1)}${__date_fmt__(cont.birthDate.getDate())}`, "YYYYMMDD").tz(tz).parseZone();
+        const prod = process.env.NODE_ENV === "prod"; // VPS IS IN DIFFERENT TIMEZONE
+        const birth = moment(`${"0".repeat(4 - String(cont.birthDate.getFullYear()).length) + String(cont.birthDate.getFullYear())}${__date_fmt__(cont.birthDate.getMonth() + 1)}${__date_fmt__(cont.birthDate.getDate())}`, "YYYYMMDD").tz(tz).add(prod ? 1 : 0, "days");
         const before = moment().tz(tz).isBefore(birth) || birth.date() === moment().tz(tz).date();
         const after = moment().tz(tz).add(30, "days").isAfter(birth);
 
