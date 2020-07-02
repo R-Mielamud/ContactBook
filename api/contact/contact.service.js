@@ -121,7 +121,7 @@ exports.remove = async (userID, id) => {
 exports.share = (express, user, email, id) => {
     try {
         const sendMail = () => send(express, {
-            from: "admin@contact-book.tk",
+            from: "Contact Book <noreply.contactbook.tk@gmail.com>",
             to: [email],
             subject: "Someone shared a contact with you! - Contact-Book.TK",
             html: `
