@@ -1,4 +1,4 @@
-const { register, exists, update } = require("./user.service");
+const { register, profile, update } = require("./user.service");
 const passport = require("passport");
 const { __getErrorFormatted } = require("../error.helper");
 const { createToken } = require("../jwt.helper");
@@ -24,8 +24,8 @@ exports.logout = async (req, res, next) => {
     next();
 };
 
-exports.exists = async (req, res, next) => {
-    res.data = await exists(req.query.email);
+exports.profile = async (req, res, next) => {
+    res.data = await profile(req.query.email);
     next();
 };
 

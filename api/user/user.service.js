@@ -37,19 +37,25 @@ exports.update = async (id, data) => {
     }
 };
 
-exports.exists = async email => {
+exports.profile = async email => {
     try {
         const user = await getByEmail(email);
 
+        if (!user) {
+            throw {
+                message: "Not authorized"
+            }
+        }
+
         return {
             success: true,
-            exists: user ? true : false
+            user: user
         }
     } catch (err) {
         return {
             success: false,
             status: 400,
-            exists: false,
+            user: null,
             message: __getErrorFormatted(err).message
         }
     }

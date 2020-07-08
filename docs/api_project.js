@@ -1,5 +1,5 @@
 define({
-  "url": "https://127.0.0.1:3001",
+  "url": "https://contact-book.tk:3001",
   "title": "Contact Book api documentation",
   "name": "contact-book-server",
   "version": "1.0.0",
@@ -9,7 +9,7 @@ define({
   "apidoc": "0.3.0",
   "generator": {
     "name": "apidoc",
-    "time": "2020-06-30T12:38:13.097Z",
+    "time": "2020-07-08T12:28:04.714Z",
     "url": "http://apidocjs.com",
     "version": "0.23.0"
   }

@@ -541,14 +541,14 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/user/exists",
-    "title": "Is user exists",
+    "url": "/api/user/profile",
+    "title": "Get user's profile",
     "group": "User",
     "success": {
       "examples": [
         {
           "title": "Success example:",
-          "content": "{\n    \"success\": true,\n    \"exists\": true [or false]\n}",
+          "content": "{\n    \"success\": true,\n    \"user\": {...}\n}",
           "type": "json"
         }
       ]
@@ -556,7 +556,7 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "api/user/index.js",
     "groupTitle": "User",
-    "name": "GetApiUserExists"
+    "name": "GetApiUserProfile"
   },
   {
     "type": "post",

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { register, logout, exists, login, update } = require("./user.controller");
+const { register, logout, profile, login, update } = require("./user.controller");
 const { validate } = require("../validator.helper");
 const { registerValidator, loginValidator, updateValidator } = require("./user.validators");
 const { reqDotPassword, auth, setPasswordToReqBody, throwOnFail } = require("./user.middleware");
@@ -90,17 +90,17 @@ router.post(
 );
 
 /**
- * @api {get} /api/user/exists Is user exists
+ * @api {get} /api/user/profile Get user's profile
  * @apiGroup User
  * @apiSuccessExample {json} Success example:
  *  {
  *      "success": true,
- *      "exists": true [or false]
+ *      "user": {...}
  *  }
  */
 router.get(
-    "/exists",
-    exists,
+    "/profile",
+    profile,
     respond
 );
 
