@@ -28,7 +28,6 @@ const RegisterForm = ({ register, set }) => {
             alert(result.message);
         } else if (result.user) {
             localStorage.setItem("user", JSON.stringify(result.user));
-            localStorage.setItem("token", JSON.stringify(result.token));
             set(result.user);
             window.location.href = "/";
         }

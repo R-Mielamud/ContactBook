@@ -4,7 +4,7 @@ import { createBrowserHistory } from "history";
 import LoginPage from "../LoginPage";
 import MainPage from "../MainPage";
 import PrivateRoute from "../PrivateRoute";
-import { exists } from "../../services/user";
+import { profile } from "../../services/user";
 import Spinner from "../../components/Spinner";
 import { connect } from "react-redux";
 import RegisterPage from "../RegisterPage";
@@ -20,7 +20,7 @@ class Routing extends React.Component {
 
         this.state = {
             requested: false,
-            exists: false
+            user: null
         }
     }
 
@@ -30,10 +30,14 @@ class Routing extends React.Component {
         if (userString && this.user.profile) {
             if (!this.state.requested) {
                 const email = JSON.parse(userString).email;
-                exists(email).then(userExists => this.setState({ requested: true, exists: userExists.exists }));
+
+                profile(email).then(userProfile => {
+                    localStorage.setItem("user", JSON.stringify(userProfile.user));
+                    this.setState({ requested: true, user: userProfile.user });
+                });
             }
         } else {
-            this.setState({ requested: true, exists: false });
+            this.setState({ requested: true, user: null });
         }
     }
 
@@ -46,9 +50,9 @@ class Routing extends React.Component {
                     <Switch>
                         <Route exact component={LoginPage} path="/login" />
                         <Route exaxt component={RegisterPage} path="/register" />
-                        <PrivateRoute exact authorized={this.state.exists || false} component={MainPage} path="/" />
-                        <PrivateRoute exact authorized={this.state.exists || false} component={UpdateProfilePage} path="/update" />
-                        <PrivateRoute authorized={this.state.exists || false} component={SharedContactPage} path="/shared/:id" />
+                        <PrivateRoute exact authorized={Boolean(this.state.user) || false} component={MainPage} path="/" />
+                        <PrivateRoute exact authorized={Boolean(this.state.user) || false} component={UpdateProfilePage} path="/update" />
+                        <PrivateRoute authorized={Boolean(this.state.user) || false} component={SharedContactPage} path="/shared/:id" />
                         <Route path="*" exact component={NotFound} />
                     </Switch>
                 </Router>

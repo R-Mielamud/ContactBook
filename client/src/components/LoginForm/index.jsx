@@ -20,7 +20,6 @@ const LoginForm = ({ login, set }) => {
             alert(result.message);
         } else if (result.user) {
             localStorage.setItem("user", JSON.stringify(result.user));
-            localStorage.setItem("token", result.token)
             set(result.user);
             window.location.href = "/";
         }

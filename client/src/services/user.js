@@ -39,10 +39,10 @@ export const logout = async () => {
     return result;
 };
 
-export const exists = async email => {
+export const profile = async email => {
     const result = await request({
         method: "GET",
-        url: `/api/user/exists?email=${email}`
+        url: `/api/user/profile?email=${email}`
     });
 
     return result;
