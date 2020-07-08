@@ -6,12 +6,10 @@ exports.register = async (data) => {
         const user = await add(data);
 
         return {
-            success: true,
             user: user
         }
     } catch (err) {
         return {
-            success: false,
             status: 400,
             user: null,
             message: __getErrorFormatted(err).message
@@ -24,12 +22,10 @@ exports.update = async (id, data) => {
         const user = await update(id, data);
 
         return {
-            success: true,
             user: user
         }
     } catch (err) {
         return {
-            success: false,
             status: 400,
             user: null,
             message: __getErrorFormatted(err).message
@@ -48,12 +44,10 @@ exports.profile = async email => {
         }
 
         return {
-            success: true,
             user: user
         }
     } catch (err) {
         return {
-            success: false,
             status: 400,
             user: null,
             message: __getErrorFormatted(err).message

@@ -17,7 +17,6 @@ exports.logout = async (req, res, next) => {
     req.logOut();
 
     res.data = {
-        success: true,
         user: null
     };
 
@@ -33,7 +32,6 @@ exports.login = (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err || !user) {
             return res.status(err ? 401 : 200).json({
-                success: (err ? false : true),
                 ...(err ? { message: err.message || err } : {}),
                 user: null
             });
@@ -42,13 +40,12 @@ exports.login = (req, res, next) => {
         req.logIn(user, err => {
             if (err) {
                 res.status(err ? 401 : 200).json({
-                    success: false,
                     user: null,
                     message: __getErrorFormatted(err).message
                 });
             }
         });
 
-        return res.json({ success: true, user, token: createToken({ id: user._id.valueOf() }) });
+        return res.json({ user, token: createToken({ id: user._id.valueOf() }) });
     })(req, res, next)
 };

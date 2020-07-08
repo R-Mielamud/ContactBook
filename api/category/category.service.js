@@ -6,12 +6,10 @@ exports.get = async (user) => {
         const result = await all(user);
 
         return {
-            success: true,
             categories: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 404,
             categories: null,
             message: __getErrorFormatted(err).message
@@ -24,12 +22,10 @@ exports.alter = async (userID, id, data) => {
         const result = await update(userID, id, data);
 
         return {
-            success: true,
             category: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             category: null,
             message: __getErrorFormatted(err).message
@@ -42,12 +38,10 @@ exports.register = async (data) => {
         const result = await add(data);
 
         return {
-            success: true,
             category: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             category: null,
             message: __getErrorFormatted(err).message
@@ -60,14 +54,10 @@ exports.remove = async (userID, id) => {
         const result = await remove(userID, id);
 
         return {
-            success: true,
-            category: {
-                state: "deleted"
-            }
+            category: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             category: null,
             message: __getErrorFormatted(err).message

@@ -7,12 +7,10 @@ exports.register = async (data) => {
         const result = await add(data);
 
         return {
-            success: true,
             contact: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             contact: null,
             message: __getErrorFormatted(err).message
@@ -25,12 +23,10 @@ exports.birthdays = async (tz, user) => {
         const result = await birthdays(tz, user);
 
         return {
-            success: true,
             contacts: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             contacts: null,
             message: __getErrorFormatted(err).message
@@ -44,19 +40,16 @@ exports.byId = async id => {
 
         if (!result) {
             return {
-                success: false,
                 status: 404,
                 contact: null
             };
         }
 
         return {
-            success: true,
             contact: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 404,
             contact: null,
             message: __getErrorFormatted(err).message
@@ -69,12 +62,10 @@ exports.get = async (user, filter, min = false) => {
         const result = await all(user, filter, min);
 
         return {
-            success: true,
             contacts: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 404,
             contacts: null,
             message: __getErrorFormatted(err).message
@@ -87,12 +78,10 @@ exports.alter = async (userID, id, data) => {
         const result = await update(userID, id, data);
 
         return {
-            success: true,
             contact: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             contacts: null,
             message: __getErrorFormatted(err).message
@@ -105,12 +94,10 @@ exports.remove = async (userID, id) => {
         const result = await remove(userID, id);
 
         return {
-            success: true,
             contact: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             contacts: null,
             message: __getErrorFormatted(err).message
@@ -144,7 +131,6 @@ exports.share = (express, user, email, id) => {
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             contacts: null,
             message: __getErrorFormatted(err).message

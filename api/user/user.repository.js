@@ -7,8 +7,7 @@ exports.add = async (data) => {
     if (checkingResult.length > 0) {
         throw {
             status: 400,
-            message: "This email is already taken",
-            success: false
+            message: "This email is already taken"
         }
     }
 
@@ -35,8 +34,7 @@ exports.update = async (id, data) => {
         if (checkingResult.length > 0) {
             throw {
                 status: 400,
-                message: "This email is already taken",
-                success: false
+                message: "This email is already taken"
             }
         }
     }

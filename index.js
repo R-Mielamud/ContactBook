@@ -8,7 +8,6 @@ const MongoStore = require("connect-mongo")(session);
 const passport = require("./passport.add");
 const api = require("./api");
 const path = require("path");
-const { authenticateJWT } = require("./api/jwt.helper");
 
 const server = express();
 
@@ -40,9 +39,9 @@ server.use((req, res, next) => {
 });
 
 server.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Origin", ["https://contact-book.tk"]);
     res.setHeader("Access-Control-Allow-Headers", "*");
-    res.setHeader("Access-Control-Allow-Methods", "*");
+    res.setHeader("Access-Control-Allow-Methods", ["GET", "POST", "DELETE", "PUT"]);
     next();
 });
 
@@ -50,7 +49,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 passport.config();
 server.use("/docs", express.static(path.join(__dirname, "docs")));
-server.use("/api", /* authenticateJWT(), */ api);
+server.use("/api", api);
 
 server.use((err, req, res, next) => {
     let e = { message: "" };

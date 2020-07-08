@@ -65,7 +65,7 @@
     "supertest": "^4.0.2"
   },
   "apidoc": {
-    "url": "https://contact-book.tk:3001",
+    "url": "https://contact-book.tk/api",
     "title": "Contact Book api documentation"
   }
 }

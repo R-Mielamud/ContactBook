@@ -17,7 +17,7 @@ exports.setPasswordToReqBody = (req, res, next) => {
 };
 
 exports.throwOnFail = (req, res, next) => {
-    if (!res.data.success) {
+    if (res.data.message) {
         return next(res.data);
     }
 

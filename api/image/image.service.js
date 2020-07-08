@@ -6,12 +6,10 @@ exports.register = async data => {
         const result = await add(data);
 
         return {
-            success: true,
             image: result
         };
     } catch (err) {
         return {
-            success: false,
             status: 400,
             image: null,
             message: __getErrorFormatted(err).message
