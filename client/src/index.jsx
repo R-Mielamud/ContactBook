@@ -13,8 +13,8 @@ window.fetch = async (url, opts) => {
     token = ((token && token.startsWith("\"")) ? token.slice(1, -1) : token)
 
     opts.headers = opts.headers
-        ? { ...opts.headers, "Authorization": "Bearer " + token }
-        : { "Authorization": "Bearer " + token };
+        ? { ...opts.headers, "Origin": window.location.origin }
+        : { "Origin": window.location.origin };
 
     return await prevFetch(PROXY + url, opts);
 };
