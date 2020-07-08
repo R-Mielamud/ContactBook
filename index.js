@@ -49,8 +49,8 @@ server.use((req, res, next) => {
 server.use(passport.initialize());
 server.use(passport.session());
 passport.config();
-server.use(express.static(path.join(__dirname, "docs")));
-server.use("/api", authenticateJWT(), api);
+server.use("/docs", express.static(path.join(__dirname, "docs")));
+server.use("/api", /* authenticateJWT(), */ api);
 
 server.use((err, req, res, next) => {
     let e = { message: "" };

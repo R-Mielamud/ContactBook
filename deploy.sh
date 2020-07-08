@@ -1,9 +1,10 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 if node -v ; then
-    sudo npm i
-    cd client
-    sudo npm i
-    cd ..
+    if npm -v ; then
+        sudo npm i
+    else
+        echo "Install npm!"
+    fi
 else
     echo "Install nodejs!"
 fi
